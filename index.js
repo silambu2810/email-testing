@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-require('dotenv').config();
 
 const app = express();
 
@@ -10,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 /* MongoDB Connection */
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect("mongodb+srv://auxiliumhostelmanagement_db_user:Auxilium9944@hmsdb.gdmebh2.mongodb.net/mailDB?appName=HMSDB")
 .then(()=> console.log("MongoDB Connected"))
 .catch(err=> console.log(err));
 
@@ -27,8 +26,8 @@ const User = mongoose.model("User",userSchema);
 const transporter = nodemailer.createTransport({
   service:"gmail",
   auth:{
-    user:process.env.EMAIL_USER,
-    pass:process.env.EMAIL_PASS
+    user:"vickramsingle@gmail.com",
+    pass:"sjbd yyna azdk crrx"
   }
 });
 
@@ -53,7 +52,7 @@ app.post("/sendmail", async(req,res)=>{
     await newUser.save();
 
     const mailOptions = {
-      from:process.env.EMAIL_USER,
+      from:"yourgmail@gmail.com",
       to:email,
       subject:"Welcome Mail",
       text:`Hello ${name}, Your message received successfully`
